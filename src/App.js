@@ -1,7 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import Routes from './Routes';
 
-function App() {
-  return <div>Hello, TrybeWallet!</div>;
+class App extends React.Component {
+  render() {
+    return (
+      <Routes />
+    );
+  }
 }
 
-export default App;
+export default connect()(App);
