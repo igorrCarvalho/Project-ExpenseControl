@@ -3,6 +3,14 @@ export const saveEmail = (data) => ({
   payload: data,
 });
 
+export const saveData = (data, value) => ({
+  type: 'SAVE_EXPENSE',
+  payload: {
+    data,
+    value,
+  },
+});
+
 export const apiRequested = () => ({
   type: 'REQUEST_STARTED',
 });

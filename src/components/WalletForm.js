@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchUrl } from '../redux/actions';
+import { fetchUrl, saveData } from '../redux/actions/index';
+import fetchApi from '../redux/services/fetchApi';
 
 class WalletForm extends Component {
   constructor() {
     super();
 
     this.state = {
-      payment: 'dinheiro',
+      payment: 'Dinheiro',
       value: '',
       currencieSelect: 'USD',
-      tag: 'alimentacao',
+      tag: 'Alimentação',
       desc: '',
     };
+    this.btnSaveClick = this.btnSaveClick.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleValue = this.handleValue.bind(this);
   }
 
   componentDidMount() {
@@ -25,6 +28,39 @@ class WalletForm extends Component {
   handleInput(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
+  }
+
+  handleValue(value, ask) {
+    const { total } = this.props;
+    let totalValue = total;
+    const brlValue = Number(value) * Number(ask);
+    totalValue += brlValue;
+    return Number(totalValue.toFixed(2));
+  }
+
+  async btnSaveClick() {
+    const { payment, value, currencieSelect, tag, desc } = this.state;
+    const { expenses, dispatch } = this.props;
+    const moedas = await fetchApi();
+    const teste = moedas[currencieSelect];
+    const saveDispense = {
+      id: expenses.length > 0 ? expenses.length : 0,
+      method: payment,
+      value,
+      currency: currencieSelect,
+      tag,
+      description: desc,
+      exchangeRates: moedas,
+    };
+    const saveArr = [...expenses, saveDispense];
+    dispatch(saveData(saveArr, this.handleValue(value, teste.ask)));
+    this.setState({
+      payment: 'Dinheiro',
+      value: '',
+      currencieSelect: 'USD',
+      tag: 'Alimentação',
+      desc: '',
+    });
   }
 
   render() {
@@ -66,9 +102,9 @@ class WalletForm extends Component {
               onChange={ this.handleInput }
               data-testid="method-input"
             >
-              <option value="dinheiro">Dinheiro</option>
-              <option value="cartao de credito">Cartão de crédito</option>
-              <option value="cartao de debito">Cartão de débito</option>
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Cartão de crédito">Cartão de crédito</option>
+              <option value="Cartão de débito">Cartão de débito</option>
             </select>
           </label>
           <label htmlFor="tag">
@@ -80,11 +116,11 @@ class WalletForm extends Component {
               onChange={ this.handleInput }
               data-testid="tag-input"
             >
-              <option value="alimentacao">Alimentação</option>
-              <option value="lazer">Lazer</option>
-              <option value="trabalho">Trabalho</option>
-              <option value="transporte">Transporte</option>
-              <option value="saude">Saúde</option>
+              <option value="Alimentação">Alimentação</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Trabalho">Trabalho</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Saúde">Saúde</option>
             </select>
           </label>
           <label htmlFor="desc">
@@ -97,6 +133,7 @@ class WalletForm extends Component {
               data-testid="description-input"
             />
           </label>
+          <button onClick={ this.btnSaveClick } type="button">Adicionar despesa</button>
         </form>
       </div>
     );
@@ -106,10 +143,16 @@ class WalletForm extends Component {
 WalletForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape({
+
+  }).isRequired).isRequired,
+  total: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (global) => ({
   currencies: global.wallet.currencies,
+  expenses: global.wallet.expenses,
+  total: global.wallet.total,
 });
 
 export default connect(mapStateToProps)(WalletForm);
