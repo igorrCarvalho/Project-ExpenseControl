@@ -30,7 +30,7 @@ describe('8 - Crie um botão para deletar uma despesa da tabela contendo as segu
       'Cinco euros', 'Lazer', 'Cartão de crédito',
       '5.00', 'Euro/Real Brasileiro', '5.13', '25.63', 'Real',
     ];
-    cy.getByTestId(BTN_DELETE_TEST_ID).first().click().should('not.exist');
+    cy.getByTestId(BTN_DELETE_TEST_ID).first().click()
 
     const deleteBtn = 1;
     cy.get('tbody tr td').should('have.length', expectedTableRow.length + deleteBtn);

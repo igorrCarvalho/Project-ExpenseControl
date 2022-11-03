@@ -3,6 +3,15 @@ export const saveEmail = (data) => ({
   payload: data,
 });
 
+export const deleteExchan = (id, value, ask) => ({
+  type: 'HANDLE_DELETE',
+  payload: {
+    id,
+    value,
+    ask,
+  },
+});
+
 export const saveData = (data, value) => ({
   type: 'SAVE_EXPENSE',
   payload: {

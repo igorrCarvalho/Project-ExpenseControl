@@ -9,6 +9,14 @@ const walletInitState = {
 
 const wallet = (state = walletInitState, action) => {
   switch (action.type) {
+  case 'HANDLE_DELETE':
+    return ({
+      ...state,
+      expenses: state.expenses.filter((obj) => obj.id !== action.payload.id),
+      total: Number((
+        state.total - (action.payload.value * action.payload.ask)
+      ).toFixed(2)),
+    });
   case 'SAVE_EXPENSE':
     return ({
       ...state,
