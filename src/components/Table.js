@@ -37,12 +37,12 @@ class Table extends Component {
             <th className="tableTitles">Editar/Excluir</th>
           </thead>
           <tbody>
-            { expenses.map((obj, ind) => {
+            { expenses.map((obj) => {
               const ask = obj.exchangeRates[obj.currency];
               const name = obj.exchangeRates[obj.currency];
               const brlValue = Number(obj.value) * Number(ask.ask);
               return (
-                <tr key={ ind }>
+                <tr key={ obj.id }>
                   <td>{ obj.description }</td>
                   <td>{ obj.tag }</td>
                   <td>{ obj.method }</td>
