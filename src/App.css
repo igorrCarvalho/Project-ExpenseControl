@@ -5,3 +5,16 @@
 .tableTitles {
   width: 180px;
 }
+
+.tableDiv {
+  display: flex;
+  justify-content: center;
+  margin-top: 30vh;
+}
+
+.tableDiv table {
+  border-collapse: collapse;
+  height: 5vw;
+  text-align: center;
+  width: 90%;
+}
