@@ -45,7 +45,7 @@ class Table extends Component {
             <th className="tableTitles">Editar/Excluir</th>
           </thead>
           <tbody>
-            { expenses?.map((obj) => {
+            { expenses.map((obj) => {
               const ask = obj.exchangeRates[obj.currency];
               const name = obj.exchangeRates[obj.currency];
               const brlValue = Number(obj.value) * Number(ask.ask);
@@ -93,7 +93,11 @@ const mapStateToProps = (state) => ({
 });
 
 Table.propTypes = {
-  expenses: PropTypes.shape([]).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    exchangeRates: PropTypes.shape([]).isRequired,
+    currency: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 

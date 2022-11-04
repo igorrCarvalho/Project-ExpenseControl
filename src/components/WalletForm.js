@@ -18,7 +18,6 @@ class WalletForm extends Component {
 
     this.state = INITIAL_STATE;
 
-    this.handleEditTotal = this.handleEditTotal.bind(this);
     this.btnSaveClick = this.btnSaveClick.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleValue = this.handleValue.bind(this);
@@ -33,22 +32,6 @@ class WalletForm extends Component {
   handleInput(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
-  }
-
-  handleEditTotal(value, ask) {
-    console.log(value, ask);
-    const { total, expenses, idToEdit } = this.props;
-    const focusObj = expenses[idToEdit];
-    const priceDecrease = focusObj.value;
-    const priceDecreaseAsk = focusObj.exchangeRates[focusObj.currency].ask;
-    const valueToDecrease = Number(priceDecrease) * Number(priceDecreaseAsk);
-    console.log(valueToDecrease);
-    let currentValue = total;
-    currentValue -= valueToDecrease;
-    const valueToAdd = Number(value) * Number(ask);
-    currentValue += valueToAdd;
-    console.log(currentValue);
-    return Number(currentValue.toFixed(2));
   }
 
   handleValue(value, ask) {
