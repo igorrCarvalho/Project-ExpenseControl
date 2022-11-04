@@ -9,6 +9,20 @@ const walletInitState = {
 
 const wallet = (state = walletInitState, action) => {
   switch (action.type) {
+  case 'END_EDIT':
+    return ({
+      ...state,
+      expenses: action.edited,
+      total: action.total,
+      editor: false,
+      idToEdit: 0,
+    });
+  case 'START_EDIT':
+    return ({
+      ...state,
+      editor: true,
+      idToEdit: action.payload,
+    });
   case 'HANDLE_DELETE':
     return ({
       ...state,

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteExchan } from '../redux/actions/index';
+import { deleteExchan, startEdit } from '../redux/actions/index';
 
 class Table extends Component {
   constructor() {
     super();
+
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleDelete({ target }) {
@@ -18,6 +20,12 @@ class Table extends Component {
     const treatedValue = Number(arrObj[0].value);
     const treatedAsk = Number(arrAsk.ask);
     dispatch(deleteExchan(treatedId, treatedValue, treatedAsk));
+  }
+
+  handleEdit({ target }) {
+    const { dispatch } = this.props;
+    const { name } = target;
+    dispatch(startEdit(Number(name)));
   }
 
   render() {
@@ -37,7 +45,7 @@ class Table extends Component {
             <th className="tableTitles">Editar/Excluir</th>
           </thead>
           <tbody>
-            { expenses.map((obj) => {
+            { expenses?.map((obj) => {
               const ask = obj.exchangeRates[obj.currency];
               const name = obj.exchangeRates[obj.currency];
               const brlValue = Number(obj.value) * Number(ask.ask);
@@ -52,7 +60,14 @@ class Table extends Component {
                   <td>{ brlValue.toFixed(2) }</td>
                   <td>Real</td>
                   <td>
-                    <button type="button">Editar</button>
+                    <button
+                      onClick={ this.handleEdit }
+                      data-testid="edit-btn"
+                      type="button"
+                      name={ obj.id }
+                    >
+                      Editar
+                    </button>
                     <button
                       onClick={ this.handleDelete }
                       name={ obj.id }

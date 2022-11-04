@@ -12,6 +12,17 @@ export const deleteExchan = (id, value, ask) => ({
   },
 });
 
+export const endEdit = (edited, total) => ({
+  type: 'END_EDIT',
+  edited,
+  total,
+});
+
+export const startEdit = (id) => ({
+  type: 'START_EDIT',
+  payload: id,
+});
+
 export const saveData = (data, value) => ({
   type: 'SAVE_EXPENSE',
   payload: {
@@ -42,6 +53,7 @@ export function fetchUrl() {
         const currenciesArr = Object.keys(resp);
         const currenciesFiltered = currenciesArr.filter((key) => key !== 'USDT');
         dispatch(successApiReq(currenciesFiltered));
+        dispatch(fetchEnded());
       });
   };
 }

@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchUrl, saveData } from '../redux/actions/index';
+import { fetchUrl, saveData, endEdit } from '../redux/actions/index';
 import fetchApi from '../redux/services/fetchApi';
+
+const INITIAL_STATE = {
+  payment: 'Dinheiro',
+  value: '',
+  currencieSelect: 'USD',
+  tag: 'Alimentação',
+  desc: '',
+};
 
 class WalletForm extends Component {
   constructor() {
     super();
 
-    this.state = {
-      payment: 'Dinheiro',
-      value: '',
-      currencieSelect: 'USD',
-      tag: 'Alimentação',
-      desc: '',
-    };
+    this.state = INITIAL_STATE;
+
+    this.handleEditTotal = this.handleEditTotal.bind(this);
     this.btnSaveClick = this.btnSaveClick.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleValue = this.handleValue.bind(this);
+    this.handleSaveEdit = this.handleSaveEdit.bind(this);
   }
 
   componentDidMount() {
@@ -30,12 +35,56 @@ class WalletForm extends Component {
     this.setState({ [name]: value });
   }
 
+  handleEditTotal(value, ask) {
+    console.log(value, ask);
+    const { total, expenses, idToEdit } = this.props;
+    const focusObj = expenses[idToEdit];
+    const priceDecrease = focusObj.value;
+    const priceDecreaseAsk = focusObj.exchangeRates[focusObj.currency].ask;
+    const valueToDecrease = Number(priceDecrease) * Number(priceDecreaseAsk);
+    console.log(valueToDecrease);
+    let currentValue = total;
+    currentValue -= valueToDecrease;
+    const valueToAdd = Number(value) * Number(ask);
+    currentValue += valueToAdd;
+    console.log(currentValue);
+    return Number(currentValue.toFixed(2));
+  }
+
   handleValue(value, ask) {
     const { total } = this.props;
     let totalValue = total;
     const brlValue = Number(value) * Number(ask);
     totalValue += brlValue;
     return Number(totalValue.toFixed(2));
+  }
+
+  async handleSaveEdit() {
+    const { payment, value, currencieSelect, tag, desc } = this.state;
+    const { dispatch, expenses, idToEdit } = this.props;
+    const arrWithoutEdit = expenses.filter((obj) => obj.id !== idToEdit);
+    const objEdited = {
+      id: idToEdit,
+      method: payment,
+      value,
+      currency: currencieSelect,
+      tag,
+      description: desc,
+      exchangeRates: await fetchApi(),
+    };
+    const newExpenses = [...arrWithoutEdit, objEdited];
+    const sortNewExpenses = newExpenses.sort((a, b) => a.id - b.id);
+    let newValue = 0;
+    sortNewExpenses.forEach((obj) => {
+      const cur = obj.currency;
+      const val = obj.value;
+      const curObj = obj.exchangeRates[cur];
+      const { ask } = curObj;
+      const newVal = Number((Number(val) * Number(ask)).toFixed(2));
+      newValue += Number(newVal.toFixed(2));
+    });
+    dispatch(endEdit(sortNewExpenses, newValue));
+    this.setState({ ...INITIAL_STATE });
   }
 
   async btnSaveClick() {
@@ -54,18 +103,12 @@ class WalletForm extends Component {
     };
     const saveArr = [...expenses, saveDispense];
     dispatch(saveData(saveArr, this.handleValue(value, teste.ask)));
-    this.setState({
-      payment: 'Dinheiro',
-      value: '',
-      currencieSelect: 'USD',
-      tag: 'Alimentação',
-      desc: '',
-    });
+    this.setState({ ...INITIAL_STATE });
   }
 
   render() {
     const { desc, tag, payment, currencieSelect, value } = this.state;
-    const { currencies } = this.props;
+    const { currencies, editor, idToEdit } = this.props;
     return (
       <div>
         <form>
@@ -133,7 +176,24 @@ class WalletForm extends Component {
               data-testid="description-input"
             />
           </label>
-          <button onClick={ this.btnSaveClick } type="button">Adicionar despesa</button>
+          { editor
+            ? (
+              <button
+                onClick={ this.handleSaveEdit }
+                type="button"
+                name={ idToEdit }
+              >
+                Editar despesa
+              </button>
+            )
+            : (
+              <button
+                onClick={ this.btnSaveClick }
+                type="button"
+              >
+                Adicionar despesa
+              </button>
+            ) }
         </form>
       </div>
     );
@@ -141,15 +201,21 @@ class WalletForm extends Component {
 }
 
 WalletForm.propTypes = {
+  idToEdit: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   expenses: PropTypes.arrayOf(PropTypes.shape({
-
+    value: PropTypes.string.isRequired,
+    exchangeRates: PropTypes.shape([]).isRequired,
+    currency: PropTypes.string.isRequired,
   }).isRequired).isRequired,
   total: PropTypes.number.isRequired,
+  editor: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (global) => ({
+  idToEdit: global.wallet.idToEdit,
+  editor: global.wallet.editor,
   currencies: global.wallet.currencies,
   expenses: global.wallet.expenses,
   total: global.wallet.total,
