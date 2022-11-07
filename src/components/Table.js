@@ -34,15 +34,15 @@ class Table extends Component {
       <div className="tableDiv">
         <table>
           <thead>
-            <th className="tableTitles">Descrição</th>
-            <th className="tableTitles">Tag</th>
-            <th className="tableTitles">Método de pagamento</th>
-            <th className="tableTitles">Valor</th>
-            <th className="tableTitles">Moeda</th>
-            <th className="tableTitles">Câmbio utilizado</th>
-            <th className="tableTitles">Valor convertido</th>
-            <th className="tableTitles">Moeda de conversão</th>
-            <th className="tableTitles">Editar/Excluir</th>
+            <th data-testid="desc-title" className="tableTitles">Descrição</th>
+            <th data-testid="tag-title" className="tableTitles">Tag</th>
+            <th data-testid="methodTitle" className="tableTitles">Método de pagamento</th>
+            <th data-testid="value-title" className="tableTitles">Valor</th>
+            <th data-testid="currencyTitle" className="tableTitles">Moeda</th>
+            <th data-testid="cambioTitle" className="tableTitles">Câmbio utilizado</th>
+            <th data-testid="convertTitle" className="tableTitles">Valor convertido</th>
+            <th data-testid="moedaTitle" className="tableTitles">Moeda de conversão</th>
+            <th data-testid="btnTitle" className="tableTitles">Editar/Excluir</th>
           </thead>
           <tbody>
             { expenses.map((obj) => {
@@ -51,13 +51,13 @@ class Table extends Component {
               const brlValue = Number(obj.value) * Number(ask.ask);
               return (
                 <tr key={ obj.id }>
-                  <td>{ obj.description }</td>
+                  <td data-testid="desc-expense">{ obj.description }</td>
                   <td>{ obj.tag }</td>
                   <td>{ obj.method }</td>
-                  <td>{ Number(obj.value).toFixed(2) }</td>
+                  <td data-testid="real-value">{ Number(obj.value).toFixed(2) }</td>
                   <td>{ name.name }</td>
                   <td>{ Number(ask.ask).toFixed(2) }</td>
-                  <td>{ brlValue.toFixed(2) }</td>
+                  <td data-testid="converted-value">{ brlValue.toFixed(2) }</td>
                   <td>Real</td>
                   <td>
                     <button

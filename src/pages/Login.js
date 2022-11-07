@@ -41,7 +41,6 @@ class Login extends React.Component {
   validateBoth() {
     const password = this.validatePassword();
     const email = this.validateEmail();
-    console.log(password, email);
     if (password && email) {
       return this.setState({
         btnDisabled: false,
