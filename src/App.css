@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap') ;
 
 * {
   margin: 0;
@@ -6,8 +6,8 @@
 }
 
 body {
-  font-family: Inter, sans-serif;
   background-color: #222;
+  font-family: Inter, sans-serif;
   color: white;
 }
 
@@ -20,9 +20,15 @@ body {
 }
 
 .tableDiv {
+  background-color: rgb(14, 14, 14);
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   margin-top: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
+  width: 85%;
 }
 
 .tableDiv table {
@@ -50,14 +56,14 @@ body {
   border-radius: 5px;
   font-size: 15px;
   height: 30px;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 30px;
   width: 80%;
 }
 
 .loginBtn {
   background-color: rgb(251, 193, 5);
   border-radius: 3px;
-  margin: 20px auto 0 auto;
+  margin: 20px auto 0;
   padding: 5px;
   transition: padding 0.2s, font-size 0.2s;
   width: 80px;
@@ -116,8 +122,8 @@ header {
 }
 
 .logoLogin {
+  margin: 20px auto 40px;
   width: 270px;
-  margin: 20px auto 40px auto;
   margin-left: auto;
   margin-right: auto;
 }
@@ -131,8 +137,8 @@ header {
 }
 
 .addBtn:hover {
-  padding: 11px;
   font-size: 15px;
+  padding: 11px;
 }
 
 .editBtn {
@@ -144,8 +150,8 @@ header {
 }
 
 .editBtn:hover {
-  padding: 11px;
   font-size: 15px;
+  padding: 11px;
 }
 
 .btnDiv {
@@ -157,15 +163,6 @@ header {
 
 .tableDiv table thead {
   color: rgb(255, 233, 159);
-}
-
-.tableDiv {
-  background-color: rgb(14, 14, 14);
-  border-radius: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 15px;
-  width: 85%;
 }
 
 .tableDiv table tbody tr {
@@ -202,5 +199,5 @@ header {
 }
 
 .totalPrice {
-  color: #5FD149;
+  color: #5Fd149;
 }
