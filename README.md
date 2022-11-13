@@ -1,6 +1,8 @@
 # Welcome to the project TrybeWallet repositorie!
 
-This project simulates an expense control wallet. It uses an currency API key to get the currencies info. The user needs to login with an valid email and a password bigger than six digits. In the wallet page the user can add the expense in various currencies. When the expense is added, the value is converted to BRL, and updated in the header. You can also edit and delete an expense.
+This project simulates an expense control wallet. It uses an currency API key to get the currencies info. The user needs to login with an valid email and a password bigger than six digits. In the wallet page the user can add the expense in various currencies. When the expense is added, the value is converted to BRL, and updated in the header. You can also edit and delete an expense.<br /><br />
+
+![ezgif com-gif-maker (9)](https://user-images.githubusercontent.com/64559670/201540976-4340bc57-bf39-4828-a0cc-2f1529f0d03e.gif)
 
 # Development
 
