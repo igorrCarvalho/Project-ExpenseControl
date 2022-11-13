@@ -160,10 +160,13 @@ class WalletForm extends Component {
               data-testid="description-input"
             />
           </label>
+        </form>
+        <div className="btnDiv">
           { editor
             ? (
               <button
                 onClick={ this.handleSaveEdit }
+                className="editBtn"
                 type="button"
                 name={ idToEdit }
               >
@@ -173,12 +176,13 @@ class WalletForm extends Component {
             : (
               <button
                 onClick={ this.btnSaveClick }
+                className="addBtn"
                 type="button"
               >
                 Adicionar despesa
               </button>
             ) }
-        </form>
+        </div>
       </div>
     );
   }

@@ -1,4 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
+  font-family: Inter, sans-serif;
   background-color: #222;
   color: white;
 }
@@ -30,7 +38,7 @@ body {
   color: white;
   display: flex;
   flex-flow: column;
-  height: 140px;
+  height: 360px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
@@ -39,19 +47,17 @@ body {
 }
 
 .loginDiv input {
-  border-radius: 3px;
+  border-radius: 5px;
   font-size: 15px;
-  height: 20px;
-  margin-bottom: 20px;
-  margin-left: 10px;
+  height: 30px;
+  margin: 0 auto 30px auto;
   width: 80%;
 }
 
 .loginBtn {
   background-color: rgb(251, 193, 5);
   border-radius: 3px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 20px auto 0 auto;
   padding: 5px;
   transition: padding 0.2s, font-size 0.2s;
   width: 80px;
@@ -63,16 +69,20 @@ body {
 }
 
 header {
+  align-items: center;
   background-color: rgb(16, 16, 16);
   display: flex;
   justify-content: space-around;
   margin-bottom: 30px;
-  padding: 10px;
+  padding: 40px;
 }
 
 .formDiv {
   background-color: rgb(23, 23, 23);
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 165px;
   margin-left: auto;
   margin-right: auto;
   padding: 20px;
@@ -83,8 +93,114 @@ header {
   align-items: center;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .formDiv form input {
+  border-radius: 5px;
+  height: 30px;
   margin-left: 10px;
+}
+
+.formDiv form select {
+  border-radius: 5px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.formDiv form textarea {
+  border-radius: 5px;
+  margin-left: 10px;
+  resize: none;
+}
+
+.logoLogin {
+  width: 270px;
+  margin: 20px auto 40px auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.addBtn {
+  background-color: rgb(251, 193, 5);
+  border-radius: 5px;
+  padding: 7px;
+  transition: padding 0.1s, font-size 0.1s;
+  width: 200px;
+}
+
+.addBtn:hover {
+  padding: 11px;
+  font-size: 15px;
+}
+
+.editBtn {
+  background-color: rgb(251, 193, 5);
+  border-radius: 5px;
+  padding: 7px;
+  transition: padding 0.1s, font-size 0.1s;
+  width: 200px;
+}
+
+.editBtn:hover {
+  padding: 11px;
+  font-size: 15px;
+}
+
+.btnDiv {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.tableDiv table thead {
+  color: rgb(255, 233, 159);
+}
+
+.tableDiv {
+  background-color: rgb(14, 14, 14);
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
+  width: 85%;
+}
+
+.tableDiv table tbody tr {
+  border-bottom: 1px solid rgb(173, 173, 173);
+  margin-bottom: 50px;
+}
+
+.editTrBtn {
+  background-color: rgb(251, 193, 5);
+  border-radius: 5px;
+  padding: 5px;
+  transition: font-size 0.1s, padding 0.1s, width 0.1s;
+  width: 60px;
+}
+
+.deleteTrBtn {
+  background-color: rgb(255, 118, 118);
+  border-radius: 5px;
+  padding: 5px;
+  transition: font-size 0.1s, padding 0.1s, width 0.1s;
+  width: 60px;
+}
+
+.editTrBtn:hover {
+  font-size: 15px;
+  padding: 7px;
+  width: 65px;
+}
+
+.deleteTrBtn:hover {
+  font-size: 15px;
+  padding: 7px;
+  width: 65px;
+}
+
+.totalPrice {
+  color: #5FD149;
 }
