@@ -61,7 +61,7 @@ class Login extends React.Component {
   render() {
     const { email, btnDisabled } = this.state;
     return (
-      <div>
+      <div className="loginDiv">
         <label htmlFor="email">
           Email
           <input
@@ -84,6 +84,7 @@ class Login extends React.Component {
           />
         </label>
         <button
+          className="loginBtn"
           onClick={ this.entryClick }
           type="button"
           disabled={ btnDisabled }

@@ -1,3 +1,8 @@
+body {
+  background-color: #222;
+  color: white;
+}
+
 .tableHeader {
   display: flex;
 }
@@ -17,4 +22,69 @@
   height: 5vw;
   text-align: center;
   width: 90%;
+}
+
+.loginDiv {
+  background-color: rgb(23, 23, 23);
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  flex-flow: column;
+  height: 140px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  padding: 15px 10px 0;
+  width: 500px;
+}
+
+.loginDiv input {
+  border-radius: 3px;
+  font-size: 15px;
+  height: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  width: 80%;
+}
+
+.loginBtn {
+  background-color: rgb(251, 193, 5);
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  transition: padding 0.2s, font-size 0.2s;
+  width: 80px;
+}
+
+.loginBtn:hover {
+  font-size: 17px;
+  padding: 7px;
+}
+
+header {
+  background-color: rgb(16, 16, 16);
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+.formDiv {
+  background-color: rgb(23, 23, 23);
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  width: 90%;
+}
+
+.formDiv form {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.formDiv form input {
+  margin-left: 10px;
 }
