@@ -7,8 +7,8 @@
 
 body {
   background-color: #222;
-  font-family: Inter, sans-serif;
   color: white;
+  font-family: Inter, sans-serif;
 }
 
 .tableHeader {
@@ -24,9 +24,9 @@ body {
   border-radius: 10px;
   display: flex;
   justify-content: center;
-  margin-top: 10vh;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10vh;
   padding: 15px;
   width: 85%;
 }
@@ -123,9 +123,9 @@ header {
 
 .logoLogin {
   margin: 20px auto 40px;
-  width: 270px;
   margin-left: auto;
   margin-right: auto;
+  width: 270px;
 }
 
 .addBtn {
@@ -199,5 +199,5 @@ header {
 }
 
 .totalPrice {
-  color: #5Fd149;
+  color: #5fd149;
 }
