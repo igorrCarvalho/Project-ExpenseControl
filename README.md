@@ -1,4 +1,4 @@
-# Welcome to the project TrybeWallet repositorie!
+# Welcome to the project Expense Control repositorie!
 
 This project was made using the TDD (Test Driven Development) method and simulates an expense control wallet. It uses an currency API key to get the currencies info. The user needs to login with an valid email and a password bigger than six digits. In the wallet page the user can add the expense in various currencies. When the expense is added, the value is converted to BRL, and updated in the header. You can also edit and delete an expense.<br /><br />
 
